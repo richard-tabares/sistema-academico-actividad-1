@@ -4,6 +4,7 @@
 - Diana Paola Quintero Ceballos
 - Richard Tabares Botero
 - Roger Avila Uribe
+- Laura Camila Parra Beltran
 
 ## Descripción general del proyecto
 
