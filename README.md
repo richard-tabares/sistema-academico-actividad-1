@@ -9,6 +9,7 @@
 Primera versión de un Sistema de Gestión Académica en Python, que representa a una universidad, su personal, estudiantes, sus programas académicos y las asignaturas curriculares. Este sistema se basa en programación orientada a objetos, donde se evidencia la aplicación de clases, atributos, métodos, constructores, encapsulamiento, herencia, sobre escritura y polimorfismo.
 
 ## Estructura de los archivos
+```text
 sistema-academico-actividad-1/
 ├── main.py                      # Menú interactivo y reporte polimórfico de personas
 ├── README.md
@@ -29,6 +30,7 @@ sistema-academico-actividad-1/
     ├── horario.py               # Día, hora de inicio, hora final, salón y código del horario
     ├── grupoAcademico.py        # Código, asignatura, docente, capacidad, estudiantes y horario
     └── excepciones.py           # Excepciones personalizadas para errores del sistema
+```
 
 ## Instrucciones para ejecutar el proyecto
 1. Tener instalado **Python 3.10 o superior**. No se requieren librerías externas.
