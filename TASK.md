@@ -1,9 +1,9 @@
 # Checklist del Taller: Sistema de Gestión Académica (POO en Python) - Actividad N.1
 
 ## README.md
-- [] Estructura de archivos
-- [] Instrucciones para ejecutar el proyecto
-- [] Explicacion breve de como se aplicaron la herencia, la sobre escritura y el polimosrfismo
+- [x] Estructura de archivos
+- [x] Instrucciones para ejecutar el proyecto
+- [x] Explicacion breve de como se aplicaron la herencia, la sobre escritura y el polimosrfismo
 
 ## Fase 1: Modelado inicial del sistema (Clases base y constructores)
 - [x] Crear la clase `persona`
@@ -99,7 +99,7 @@
 
 ## Fase 3: Relación de composición
 - [x] Verificar que la clase `Horario` se instancie e integre dentro de la estructura de `GrupoAcademico` evidenciando composición (ciclo de vida ligado o dependencia estricta).
-- [ ] Documentar en el archivo `README.md` y en el Documento de Decisiones de Diseño la justificación de por qué la relación entre grupo y horario es de composición y no de herencia.
+- [x] Documentar en el archivo `README.md` y en el Documento de Decisiones de Diseño la justificación de por qué la relación entre grupo y horario es de composición y no de herencia.
 
 ## Fase 4: Control de situaciones excepcionales (Excepciones personalizadas)
 - [ ] Crear clases de excepciones personalizadas heredando de `Exception`:
@@ -117,7 +117,7 @@
   - [x] Crear horarios y grupos académicos vinculando objetos existentes.
   - [x] Matricular estudiantes en un grupo.
   - [x] Retirar estudiantes de un grupo.
-  - [ ] Buscar asignaturas y programas académicos (disparando las excepciones si no se encuentran).
+  - [x] Buscar asignaturas y programas académicos (disparando las excepciones si no se encuentran).
 - [ ] Implementar pruebas en el menú que demuestren:
   - [ ] Imposibilidad de instanciar `persona` directamente.
   - [ ] Matrícula correcta y rechazo de duplicados.
@@ -129,4 +129,4 @@
 - [ ] Crear la etiqueta (tag) en Git denominada `Entrega_AC2`.
 - [ ] Actualizar el archivo `README.md` con la información solicitada en la actividad (declaración de IA, estructura, etc.).
 - [ ] Elaborar y adjuntar el **Documento de Decisiones de Diseño** en formato PDF o Markdown respondiendo detalladamente a todas las preguntas planteadas en la guía.
-- [ ] Verificar que todos los integrantes del equipo cuenten con al menos un commit válido y registrado en el repositorio.
+- [x] Verificar que todos los integrantes del equipo cuenten con al menos un commit válido y registrado en el repositorio.

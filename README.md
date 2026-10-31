@@ -1,7 +1,6 @@
 # Sistema Académico
 
 ## Nombre de los integrantes
-- Diana Paola Quintero Ceballos
 - Richard Tabares Botero
 - Roger Avila Uribe
 - Laura Camila Parra Beltran
@@ -10,21 +9,28 @@
 Primera versión de un Sistema de Gestión Académica en Python, que representa a una universidad, su personal, estudiantes, sus programas académicos y las asignaturas curriculares. Este sistema se basa en programación orientada a objetos, donde se evidencia la aplicación de clases, atributos, métodos, constructores, encapsulamiento, herencia, sobre escritura y polimorfismo.
 
 ## Estructura de los archivos
+```text
 sistema-academico-actividad-1/
 ├── main.py                      # Menú interactivo y reporte polimórfico de personas
 ├── README.md
 ├── TASK.md                      # Lista de verificación de las fases del taller
 ├── controllers/
-│   └── user_controller.py       # Controlador: crea y almacena las personas en una lista
-│   └── programa_controller.py       # Controlador: crea y almacena los programas en una lista
-│   └── asignatura_controller.py       # Controlador: crea y almacena las asignaturas en una lista
+│   ├── user_controller.py           # Controlador: crea y almacena las personas en una lista
+│   ├── programa_controller.py       # Controlador: crea y almacena los programas en una lista
+│   ├── asignatura_controller.py     # Controlador: crea y almacena las asignaturas en una lista
+│   ├── horario_controller.py        # Controlador: crea y almacena los horarios en una lista
+│   └── grupoAcademico_controller.py # Controlador: crea y almacena los grupos académicos
 └── models/
     ├── persona.py               # Clase base con los datos comunes (nombre, identificación, correo)
     ├── estudiante.py            # Hereda de persona: código, programa académico, semestre y promedio
     ├── docente.py               # Hereda de persona: n.º de empleado, facultad, contratación y horas semanales
     ├── administrativo.py        # Hereda de persona: n.º de empleado, dependencia, cargo y jornada
     ├── programaAcademico.py     # Código, nombre, facultad y número de semestres
-    └── asignatura.py            # Código, nombre, número de créditos y código del programa
+    ├── asignatura.py            # Código, nombre, número de créditos y código del programa
+    ├── horario.py               # Día, hora de inicio, hora final, salón y código del horario
+    ├── grupoAcademico.py        # Código, asignatura, docente, capacidad, estudiantes y horario
+    └── excepciones.py           # Excepciones personalizadas para errores del sistema
+```
 
 ## Instrucciones para ejecutar el proyecto
 1. Tener instalado **Python 3.10 o superior**. No se requieren librerías externas.
@@ -68,3 +74,13 @@ Ingrese una opción del 1 al 9:
 **Sobre escritura.** Las tres subclases redefinen `mostrar_informacion()`. Cada una imprime su encabezado, llama a `super().mostrar_informacion()` para mostrar los datos generales de `persona` y luego agrega los datos propios (por ejemplo, el código y el promedio del estudiante, o la dependencia y la jornada del administrativo). Además, cada subclase implementa `realizar_actividad_principal()` con su propio comportamiento: el estudiante indica qué programa cursa y en qué semestre está, el docente en qué facultad orienta clases y el administrativo qué cargo desempeña y en qué dependencia.
 
 **Polimorfismo.** El controlador (`userController`) guarda en una única lista, `personas`, objetos de los tres tipos. La función `mostrar_usuarios()` de `main.py` recorre esa lista con un solo ciclo `for` y, para cada elemento, invoca `mostrar_informacion()` y `realizar_actividad_principal()`. No usa condicionales ni distingue el tipo de objeto: Python ejecuta automáticamente la versión que corresponde a la clase real de cada uno, de manera que las mismas dos llamadas producen resultados distintos según se trate de un estudiante, un docente o un administrativo.
+
+## Relación de composición entre grupo académico y horario
+
+La clase `grupoAcademico` no hereda de `horario`: **contiene** un horario. Esta decisión se justifica porque la herencia y la composición representan relaciones distintas.
+
+**Herencia ("es un").** Se aplica cuando una clase es una especialización de otra y comparte sus atributos y comportamiento, como ocurre con `estudiante`, `docente` y `administrativo` respecto de `persona`. Un horario no es un tipo de grupo académico ni un grupo es un tipo de horario: son conceptos con datos y responsabilidades diferentes (el horario describe cuándo y dónde se dicta una clase; el grupo reúne asignatura, docente, capacidad y estudiantes). Forzar una herencia entre ellos crearía una jerarquía artificial en la que el grupo heredaría métodos que no le corresponden y se mezclarían dos responsabilidades independientes.
+
+**Composición ("tiene un").** Un grupo académico *tiene* un horario. En el constructor de `grupoAcademico` se recibe un objeto de tipo `horario` y su información se integra al grupo mediante `set_horario()`; así, el horario es una parte indispensable del grupo y no una especialización suya. El grupo reutiliza los getters de `horario` (día, hora de inicio, hora final y salón) para construir y mostrar su propio horario, en lugar de heredarlos.
+
+**Ciclo de vida.** El horario se crea con la clase `horario` y queda ligado a la estructura del grupo: no tiene sentido en el sistema por fuera de él, pues su función es indicar cuándo y dónde se dicta ese grupo. Esa dependencia estricta es la que caracteriza la composición.
