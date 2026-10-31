@@ -31,25 +31,23 @@ class CapacidadMaximaExcedidaExcepcion(SistemaAcademicoError):
 # ---------------------------------------------------------------------------
 # Excepciones de búsqueda (se lanzan desde los controladores)
 # ---------------------------------------------------------------------------
-class AsignaturaNoExisteExcepcion(SistemaAcademicoError):
+class AsignaturaNoEncontradaExcepcion(SistemaAcademicoError):
     """No existe una asignatura registrada con el código buscado."""
 
-    def __init__(self, codigoAsignatura):
-        self.codigoAsignatura = codigoAsignatura
+    def __init__(self, nombre):
+        self.nombre = nombre
         super().__init__(
-            f"No existe una asignatura registrada con el código '{codigoAsignatura}'."
+            f"No existe una asignatura registrada con el nombre '{nombre}'."
         )
 
-
-class ProgramaNoExisteExcepcion(SistemaAcademicoError):
+class ProgramaNoEncontradoExcepcion(SistemaAcademicoError):
     """No existe un programa académico registrado con el código buscado."""
 
-    def __init__(self, codigoPrograma):
-        self.codigoPrograma = codigoPrograma
+    def __init__(self, nombre):
+        self.nombre = nombre
         super().__init__(
-            f"No existe un programa académico registrado con el código '{codigoPrograma}'."
-        )
-
+            f"No existe un programa académico registrado con el nombre '{nombre}'."
+        )       
 
 class GrupoNoExisteExcepcion(SistemaAcademicoError):
     """No existe un grupo académico registrado con el código buscado."""

@@ -1,4 +1,7 @@
 from models.asignatura import asignatura
+from models.excepciones import AsignaturaNoEncontradaExcepcion
+
+TILDES = str.maketrans("áéíóúü", "aeiouu")
 
 class asignaturaController():
 
@@ -13,4 +16,13 @@ class asignaturaController():
         return self.asignaturas.copy()
     
     def buscar_asignatura_por_nombre(self, nombre):
-        return [asig for asig in self.asignaturas if asig.get_nombre() == nombre]
+        asignaturas_encontradas = [
+            asig for asig in self.asignaturas 
+            if asig.get_nombre().lower().translate(TILDES) == nombre.lower().translate(TILDES)
+            ]
+        if not asignaturas_encontradas:
+            raise AsignaturaNoEncontradaExcepcion(nombre)
+        return asignaturas_encontradas
+
+    
+    

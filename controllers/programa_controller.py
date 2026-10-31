@@ -1,4 +1,7 @@
 from models.programaAcademico import programaAcademico
+from models.excepciones import ProgramaNoEncontradoExcepcion
+
+TILDES = str.maketrans("áéíóúü", "aeiouu")
 
 class programaController():
 
@@ -13,5 +16,12 @@ class programaController():
         return self.programas.copy()
     
     def buscar_programa_por_nombre(self, nombre):
-        return [prog for prog in self.programas if prog.get_nombre() == nombre]
+        programas_encontrados = [
+            prog for prog in self.programas 
+            if prog.get_nombre().lower().translate(TILDES) == nombre.lower().translate(TILDES)
+            ]
+        if not programas_encontrados:
+            raise ProgramaNoEncontradoExcepcion(nombre) 
+        return programas_encontrados
+    
     
