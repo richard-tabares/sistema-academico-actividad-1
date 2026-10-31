@@ -3,7 +3,7 @@ from controllers.asignatura_controller import asignaturaController
 from controllers.programa_controller import programaController
 from controllers.horario_controller import horarioController
 from controllers.grupoAcademico_controller import grupoAcademicoController
-from models.excepciones import (EstudianteYaMatriculadoExcepcion, CapacidadMaximaExcedidaExcepcion)
+from models.excepciones import (EstudianteYaMatriculadoExcepcion, CapacidadMaximaExcedidaExcepcion, AsignaturaNoEncontradaExcepcion, ProgramaNoEncontradoExcepcion)
 
 # metodo para mostrar todo los usuario y aplica POLIMORFISMO
 def mostrar_usuarios(user_controller):
@@ -426,28 +426,36 @@ def main():
                 
             case '16':
                 print("\n--- Buscar asignaturas ---")
-                name_asignatura = input("Ingrese el nombre de la asignatura a buscar: ")
-                asignaturas = asignatura_controller.buscar_asignatura_por_nombre(name_asignatura)
-                if asignaturas:
-                    print(f"Se encontraron {len(asignaturas)} asignatura(s) con el nombre '{name_asignatura}':")
-                    for asignatura in asignaturas:
-                        asignatura.mostrar_informacion()
-                        print("-"*100)
+                try:
+                    name_asignatura = input("Ingrese el nombre de la asignatura a buscar: ")
+                    asignaturas = asignatura_controller.buscar_asignatura_por_nombre(name_asignatura)
+                except AsignaturaNoEncontradaExcepcion as e:
+                    print(f"[Error] {e}")
                 else:
-                    print(f"No se encontraron asignaturas con el nombre '{name_asignatura}'.") 
-                
+                    if asignaturas:
+                        print("\n--- Resultados de la búsqueda ---")
+                        for asignatura in asignaturas:
+                            asignatura.mostrar_informacion()
+                            print("-"*100)
+                    else:
+                        print("No se encontraron asignaturas con ese nombre.")
+
             case '17':
                 print("\n--- Buscar programas ---")
-                name_programa = input("Ingrese el nombre del programa a buscar: ")
-                programas = programa_controller.buscar_programa_por_nombre(name_programa)
-                if programas:
-                    print(f"Se encontraron {len(programas)} programa(s) con el nombre '{name_programa}':")
-                    for programa in programas:
-                        programa.mostrar_informacion()
-                        print("-"*100)
+                try:
+                    name_programa = input("Ingrese el nombre del programa a buscar: ")
+                    programas = programa_controller.buscar_programa_por_nombre(name_programa)
+                except ProgramaNoEncontradoExcepcion as e:
+                    print(f"[Error] {e}")
                 else:
-                    print(f"No se encontraron programas con el nombre '{name_programa}'.")
-            
+                    if programas:
+                        print("\n--- Resultados de la búsqueda ---")
+                        for programa in programas:
+                            programa.mostrar_informacion()
+                            print("-"*100)
+                    else:
+                        print("No se encontraron programas con ese nombre.")
+
             case '0':
                 print("Salir del sistema")
                 break
