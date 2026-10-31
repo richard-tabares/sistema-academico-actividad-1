@@ -1,5 +1,7 @@
 from models.horario import horario
 
+from models.excepciones import EstudianteYaMatriculadoExcepcion, CapacidadMaximaExcedidaExcepcion
+
 class grupoAcademico:
     def __init__(self, codigoGrupo, asignatura, docente, capacidad, horario):
         self.set_codigoGrupo(codigoGrupo)
@@ -54,13 +56,13 @@ class grupoAcademico:
     def matricular_estudiante(self, estudiante):
         for est in self.estudiantesMatriculados:
             if est.getCodigoEstudiante() == estudiante.getCodigoEstudiante():
-                print(f"El estudiante {estudiante.getCodigoEstudiante()} ya está matriculado en el grupo {self.get_codigoGrupo()}.")
-                return
+                raise EstudianteYaMatriculadoExcepcion(estudiante.getCodigoEstudiante(), self.get_codigoGrupo())
+            
         if len(self.estudiantesMatriculados) < self.get_capacidad():
             self.estudiantesMatriculados.append(estudiante)
             print(f"Estudiante matriculado en el grupo {self.get_codigoGrupo()}")
         else:
-            print("No se puede matricular más estudiantes. Grupo lleno.")
+            raise CapacidadMaximaExcedidaExcepcion(self.get_codigoGrupo(), self.get_capacidad())
         print(f"Horario: {self.get_horario()}")  
 
     def retirar_estudiante(self, codigoEstudiante):

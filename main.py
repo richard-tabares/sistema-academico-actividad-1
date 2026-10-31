@@ -3,6 +3,7 @@ from controllers.asignatura_controller import asignaturaController
 from controllers.programa_controller import programaController
 from controllers.horario_controller import horarioController
 from controllers.grupoAcademico_controller import grupoAcademicoController
+from models.excepciones import (EstudianteYaMatriculadoExcepcion, CapacidadMaximaExcedidaExcepcion)
 
 # metodo para mostrar todo los usuario y aplica POLIMORFISMO
 def mostrar_usuarios(user_controller):
@@ -353,8 +354,11 @@ def main():
                                 print("[Error] Selección de grupo inválida.")
 
                             if grupoSeleccionado is not None:
-                                grupo_academico_controller.agregar_estudiante(grupoSeleccionado.get_codigoGrupo(), estudianteSeleccionado)
-            
+                                try:
+                                    grupo_academico_controller.agregar_estudiante(grupoSeleccionado.get_codigoGrupo(), estudianteSeleccionado)
+                                except (EstudianteYaMatriculadoExcepcion, CapacidadMaximaExcedidaExcepcion) as e:
+                                    print(f"[Error] {e}")
+
             case '9':
                 print("\n--- Retirar Estudiante ---")
                 gruposDisponibles = grupo_academico_controller.get_grupos_academicos()
