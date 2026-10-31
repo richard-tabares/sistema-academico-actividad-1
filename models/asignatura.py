@@ -6,7 +6,10 @@ class asignatura:
         self.set_codigoPrograma(codigoPrograma)
         
     def mostrar_informacion(self):
-        return self.get_codigoAsignatura(), self.get_nombre(), self.get_numeroDeCreditos(), self.get_codigoPrograma()
+        print(f"Codigo de la asignatura: {self.get_codigoAsignatura()}")
+        print(f"Nombre de la asignatura: {self.get_nombre()}")
+        print(f"Numeros de creditos: {self.get_numeroDeCreditos()}")
+        print(f"Codigo del programa: {self.get_codigoPrograma()}")
     
     # Getters and Setters
     def set_codigoAsignatura(self, codigoAsignatura):
@@ -20,9 +23,13 @@ class asignatura:
     
     def get_nombre(self):
         return self._nombre
-    
+
+    # Validación para que el número de créditos sea mayor que cero
     def set_numeroDeCreditos(self, numeroDeCreditos):
-        self._numeroDeCreditos = numeroDeCreditos
+        if(numeroDeCreditos > 0):
+            self._numeroDeCreditos = numeroDeCreditos
+        else:
+            raise ValueError("El número de créditos de la Asignatura debe ser mayor que cero")
         
     def get_numeroDeCreditos(self):
         return self._numeroDeCreditos
