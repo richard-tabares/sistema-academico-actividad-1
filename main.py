@@ -311,7 +311,7 @@ def main():
                     diaHorario = input("Ingresa el día del horario: ")
                     horaIncioHorario = input("Ingresa la hora de inicio (00:00): ")
                     horaFinalHorario = input("Ingresa la hora de finalización (00:00): ")
-                    salonHorario = input("Ingresa la hora de finalización: ")
+                    salonHorario = input("Ingresa el número del salon: ")
                 
                     # utilizamos el controlador para agregar un nuevo horario
                     horario_controller.agregar_horario(codigoHorario, diaHorario, horaIncioHorario, horaFinalHorario, salonHorario)
