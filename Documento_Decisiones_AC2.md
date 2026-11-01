@@ -13,8 +13,8 @@ Laura Camila Parra Beltran
 **Curso:** Programación 1  
 **Docente:** Natalia Castellanos
 **Universidad:** Universidad de Manizales  
-**Facultad / Programa:** Ingeniería en Seguridad de la Información
-**Fecha:** 31 de octubre de 2026
+**Facultad / Programa:** Ingeniería en Seguridad de la Información - Ingeniería de Sistemas
+**Fecha:** 01 de noviembre de 2026
 
 
 ## 1. Introducción
